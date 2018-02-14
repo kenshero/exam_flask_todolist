@@ -1,4 +1,6 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+import json
+
 from TodoModel import Todo
 
 
@@ -21,7 +23,9 @@ def get_todos():
 @app.route('/save', methods=["POST"])
 def save_todo():
     todo = Todo()
-    print("Todo:", todo.save_todo())
+    todo_name = request.form.get('todo_name')
+    todo.save_todo(todo_name)
+    # todo = Todo()
     # Todo.save_todo()
     return "save it"
 

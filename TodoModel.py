@@ -22,12 +22,15 @@ class Todo:
         self.conn.close()
         return todos
 
-    def save_todo(self):
+    def save_todo(self, todo_name):
+        print("todo_name: {}".format(todo_name))
         cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         cursor.execute("""
             INSERT INTO todos (todo_name)
-            VALUES ('5555 gg ez')
-        """)
+            VALUES (%(todo_name)s)
+        """, dict(
+            todo_name=todo_name,
+        ))
         self.conn.commit()
         self.conn.close()
 
