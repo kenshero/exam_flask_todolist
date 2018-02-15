@@ -33,7 +33,6 @@ def save_todo():
 
 @app.route('/edit_todo', methods=["PUT"])
 def edit_todo():
-    # import ipdb; ipdb.set_trace();
     try:
         todo_id = request.json['todoID']
         todo_name = request.json['todoName']
