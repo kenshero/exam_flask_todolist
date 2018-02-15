@@ -3,10 +3,12 @@ angular.module('todoList', ['todoList.service'])
     var todoList = this;
     todoList.activeModal = false
     todoList.editTodoData = {}
+    todoList.loading = true
 
     todos.fetchTodoList(function(data){
       todoList.todos = data.data
       console.log(todoList.todos)
+      todoList.loading = false
     });
 
     todoList.saveTodo = (todoName) => {

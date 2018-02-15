@@ -10,6 +10,21 @@
   <script src="./js/controller.js"></script>
   <script src="./js/services.js"></script>
 </head>
+<style type="text/css">
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
 <body ng-controller="todoListController as todoList">
   <div class="container">
     <div class="field">
@@ -22,7 +37,8 @@
         <button class="button is-primary" ng-click="todoList.saveTodo(todoList.todoName)">Submit</button>
       </div>
     </div>
-      <table class="table is-striped">
+      <div class="loader" ng-show="todoList.loading"></div>
+      <table class="table is-striped" ng-show="!todoList.loading">
         <thead>
           <tr>
             <th>Todo List</th>
