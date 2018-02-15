@@ -64,4 +64,3 @@ def delete_todo(todo_id):
             "data": "",
             "error": "cannot deleted todo: {}".format(e)
         })
-
