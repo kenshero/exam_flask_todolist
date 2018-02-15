@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="todoList">
+<head>
+  <meta charset="utf-8">
+  <title>Todo List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="./lib/bulma.min.css">
+  <script src="./lib/angular.min.js"></script>
+  <script src="./js/controller.js"></script>
+  <script src="./js/services.js"></script>
+</head>
+<body ng-controller="todoListController as todoList">
+  <div class="container">
+    <div class="field">
+      <label class="label">Todo</label>
+      <div class="control">
+        <input class="input" ng-model="todoList.todoName" type="text" class="is-4" placeholder="Todo Input">
+      </div>
+      <br/>
+      <div class="control">
+        <button class="button is-primary" ng-click="todoList.saveTodo(todoList.todoName)">Submit</button>
+      </div>
+    </div>
+    <table class="table is-striped">
+      <thead>
+        <tr>
+          <th>Todo List</th>
+          <th>tools</th>
+        </tr>
+      </thead>
+      <tbody ng-repeat="todo in todoList.todos">
+        <tr>
+          <th>{{todo[0]}}</th>
+          <td>
+            <button class="button is-warning">Edit</button>
+            <button class="button is-danger" ng-click="todoList.deleteTodo(todo[1])">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
