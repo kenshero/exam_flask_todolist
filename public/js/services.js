@@ -30,6 +30,17 @@ angular.module('todoList.service', [])
         .catch(function(data, status, headers, config){
           callback({error: data});
         });
+      },
+      updateTodoList: function(payload, callback) {
+        $http.put(`http://localhost:5000/edit_todo`, payload).then(function(response){
+          if(response.error) {
+            console.log("Error:", response.error);
+          }
+          callback(response)
+        })
+        .catch(function(data, status, headers, config){
+          callback({error: data});
+        });
       }
     }
   }]);

@@ -17,7 +17,7 @@ class Todo:
 
     def get_todos(self):
         cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
-        cursor.execute("SELECT * from todos")
+        cursor.execute("SELECT * from todos order by id")
         todos = cursor.fetchall()
         self.conn.close()
         return todos
@@ -33,15 +33,15 @@ class Todo:
         self.conn.commit()
         self.conn.close()
 
-    def edit_todo(self, todo_id, todo_edit_name):
+    def edit_todo(self, todo_id, todo_name):
         cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
         cursor.execute("""
             UPDATE
                 todos
-            SET todo_name = %(todo_edit_name)s
+            SET todo_name = %(todo_name)s
             WHERE id = %(todo_id)s
             """, dict(
-            todo_edit_name=todo_edit_name,
+            todo_name=todo_name,
             todo_id=todo_id,
         ))
         self.conn.commit()

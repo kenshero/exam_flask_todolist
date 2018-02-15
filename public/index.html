@@ -22,23 +22,42 @@
         <button class="button is-primary" ng-click="todoList.saveTodo(todoList.todoName)">Submit</button>
       </div>
     </div>
-    <table class="table is-striped">
-      <thead>
-        <tr>
-          <th>Todo List</th>
-          <th>tools</th>
-        </tr>
-      </thead>
-      <tbody ng-repeat="todo in todoList.todos">
-        <tr>
-          <th>{{todo[0]}}</th>
-          <td>
-            <button class="button is-warning">Edit</button>
-            <button class="button is-danger" ng-click="todoList.deleteTodo(todo[1])">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table is-striped">
+        <thead>
+          <tr>
+            <th>Todo List</th>
+            <th>tools</th>
+          </tr>
+        </thead>
+        <tbody ng-repeat="todo in todoList.todos">
+          <tr>
+            <th>{{todo[0]}}</th>
+            <td>
+              <button class="button is-warning" ng-click="todoList.editTodo(todo)">Edit</button>
+              <button class="button is-danger" ng-click="todoList.deleteTodo(todo[1])">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <div ng-class="todoList.activeModal ? 'modal is-active' : 'modal'" >
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Edit Todo</p>
+          <button class="delete" aria-label="close" ng-click="todoList.hideModal()"></button>
+        </header>
+        <section class="modal-card-body">
+          <label class="label">Todo Name</label>
+          <div class="control">
+            <input class="input" ng-model="todoList.editTodoData.todoName" type="text" class="is-4" placeholder="Todo Input">
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success" ng-click="todoList.updateTodo(todoList.editTodoData)">Save changes</button>
+          <button class="button" ng-click="todoList.hideModal()">Cancel</button>
+        </footer>
+      </div>
+    </div>
   </div>
 </body>
 </html>

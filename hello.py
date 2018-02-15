@@ -37,18 +37,23 @@ def save_todo():
         })
 
 
-@app.route('/edit_todo/<int:todo_id>', methods=["PUT"])
-def edit_todo(todo_id):
+@app.route('/edit_todo', methods=["PUT"])
+def edit_todo():
     # import ipdb; ipdb.set_trace();
-    # todo = Todo()
-    # todo_name = request.form.get('todo_edit_name')
-    # user = User.query.get(id)
-    # username = request.json['username']
-    # email = request.json['email']
-
-    # todo = Todo()
-    # todos_data = todo.get_todos()
-    return "edit it"
+    try:
+        todo_id = request.json['todoID']
+        todo_name = request.json['todoName']
+        todo = Todo()
+        todo.edit_todo(todo_id, todo_name)
+        return jsonify({
+            "data": "edited todo",
+            "error": ""
+        })
+    except Exception as e:
+        return jsonify({
+            "data": "",
+            "error": "cannot edit todo: {}".format(e)
+        })
 
 
 @app.route('/delete_todo/<int:todo_id>', methods=["DELETE"])

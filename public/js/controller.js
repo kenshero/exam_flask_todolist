@@ -1,6 +1,8 @@
 angular.module('todoList', ['todoList.service'])
   .controller('todoListController', ['Todo',function(todos) {
     var todoList = this;
+    todoList.activeModal = false
+    todoList.editTodoData = {}
 
     todos.fetchTodoList(function(data){
       todoList.todos = data.data
@@ -25,6 +27,29 @@ angular.module('todoList', ['todoList.service'])
           todoList.todos = data.data
         });
       });
+    }
+
+    todoList.editTodo = (todo) => {
+      console.log("todo:", todo);
+      todoList.activeModal = true
+      todoList.editTodoData = {
+          todoName: todo[0],
+          todoID: todo[1]
+      }
+    }
+
+    todoList.updateTodo = (editData) => {
+      todos.updateTodoList(editData, function(data){
+        todos.fetchTodoList(function(data){
+          todoList.todos = data.data
+          todoList.editTodoData = {}
+          todoList.activeModal = false
+        });
+      });
+    }
+
+    todoList.hideModal = () => {
+      todoList.activeModal = false
     }
 
 }]);
