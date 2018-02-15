@@ -1,16 +1,10 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import json
 
 from TodoModel import Todo
 
 app = Flask(__name__)
 CORS(app)
-
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
 
 
 @app.route('/get_todos')
@@ -71,8 +65,3 @@ def delete_todo(todo_id):
             "error": "cannot deleted todo: {}".format(e)
         })
 
-
-
-# @app.route('/post/<int:post_id>')
-# def show_post(post_id):
-#     return 'Post %d' % post_id
